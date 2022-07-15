@@ -28,8 +28,22 @@ pipelineJob('theme-park-job-docker') {
                     remote {
                         url 'https://github.com/dmac088/ThemePark.git'
                     }
-                    branch 'master'
+                    branch 'main'
                     scriptPath('Jenkinsfile-docker')
+                }
+            }
+        }
+    }
+}
+pipelineJob('sorbet-job') {
+    definition {
+        cpsScm {
+            scm {
+                git {
+                    remote {
+                        url 'https://github.com/dmac088/Sorbet.git'
+                    }
+                    branch 'main'
                 }
             }
         }
