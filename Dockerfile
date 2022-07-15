@@ -5,8 +5,12 @@ RUN curl -sSL https://get.docker.com/ | sh
 RUN usermod -a -G docker jenkins
 USER jenkins
 
-COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
-RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
+
+COPY --chown=jenkins:jenkins plugins.txt /usr/share/jenkins/ref/plugins.txt
+RUN jenkins-plugin-cli -f /usr/share/jenkins/ref/plugins.txt
+
+#COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
+#RUN /usr/local/bin/install-plugins-cli.sh < /usr/share/jenkins/ref/plugins.txt
 
 COPY seedJob.xml /usr/share/jenkins/ref/jobs/seed-job/config.xml
 
